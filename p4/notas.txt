@@ -1,0 +1,43 @@
+
+    private static void combinacionVacas(File archivo, double lecheMinima, int espacio) throws FileNotFoundException {
+
+        ArrayList<Vaca> listaVacas = LeerArchivo.lecturaArchivo(archivo); /* Lista donde estan todas las vacas */
+        int[] soluciones = new int[listaVacas.size()]; /* Vector donde guardaremos las soluciones parciales */
+        ArrayList<int[]> listaSoluciones = new ArrayList<int[]>(); /* ArrayList que contendra todos los vectores que son solucion */
+        combinaciones(soluciones, listaVacas, lecheMinima, 0, 0, espacio, 0, listaSoluciones);
+
+        if (listaSoluciones.size() == 0) { /* Si la lista de soluciones esta vacia no hay soluciones posibles */
+            System.out.println("No hay combinacion posible para " + lecheMinima + " litros de leche y " + espacio
+                    + " hectareas.\n");
+        } else {
+            
+            
+            
+ 
+            /* Si la lista no esta vacia, vamos imprimiendo una a una las soluciones junto a sus datos */
+            /* Recorremos la lista de soluciones usando variables auxiliares para poder guardar los datos de la leche que se
+             produce y el espacio que ocupa */
+            for (int i = 0; i < listaSoluciones.size(); i++) { 
+                double lecheProducida = 0;
+                int espacioGastado = 0;
+                int[] vector = listaSoluciones.get(i); // Obtenemos un vector solucion, en este caso el de la posición i
+                System.out.print("Conjunto " + (i + 1) + ":\n");
+                for (int j = 0; j < vector.length; j++) { /* Recorremos el vector de solucion */
+                    /* Si la posicion i esta en 1, significa que la vaca i de la lista de vacas, es una vaca perteneciente a la 
+                    solucion */
+                    if (vector[j] == 1) {
+                        /* Vamos actualizando los valores de la leche y el espacio cada vez que haya una vaca solucion */
+                        lecheProducida += listaVacas.get(j).getLeche();
+                        espacioGastado += listaVacas.get(j).getEspacio();
+                        System.out.print("Vaca:" + listaVacas.get(j).getId() + " ");
+                    }
+                }
+                /* Una vez tenemos todos los datos, imprimimos la solucion que hemos obtenido junto a sus datos */
+                System.out.println(
+                        "\nLeche producida en el conjunto " + i + ": " + String.format("%.1f", lecheProducida)
+                                + " litros en " + espacioGastado + " hectareas");
+                System.out.println();
+                
+            }
+        }
+    }
