@@ -1,2 +1,2 @@
 # programming-methodology
-Projects carried out for the programming methodology course of the second year in computer engineering at the university of castilla la mancha
+Practical work carried out in the subject Programming Methodology in the second year of the Degree in Computer Engineering at the University of Castilla-La Mancha.
